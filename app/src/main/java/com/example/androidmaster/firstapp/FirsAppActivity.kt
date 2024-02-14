@@ -1,5 +1,6 @@
 package com.example.androidmaster.firstapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,10 @@ class FirsAppActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             val name=etName.text.toString()
             if (name.isNotEmpty()){
-                Log.i("WildDev","Pulsado ${name}")
+                //Log.i("WildDev","Pulsado ${name}")
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra("EXTRA_NAME", name)
+                startActivity(intent)
             }
 
         }
