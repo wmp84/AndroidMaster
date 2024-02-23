@@ -2,9 +2,12 @@ package com.example.androidmaster.imccalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.androidmaster.R
+import com.google.android.material.slider.RangeSlider
+import java.text.DecimalFormat
 
 class ImcCalculatorActivity : AppCompatActivity() {
 
@@ -13,6 +16,9 @@ class ImcCalculatorActivity : AppCompatActivity() {
 
     private lateinit var viewMale: CardView
     private lateinit var viewFemale: CardView
+    private lateinit var tvHeight: TextView
+    private lateinit var rsHeight: RangeSlider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imc_calculator)
@@ -24,6 +30,8 @@ class ImcCalculatorActivity : AppCompatActivity() {
     private fun initComponents() {
         viewMale = findViewById(R.id.viewMale)
         viewFemale = findViewById(R.id.viewFemale)
+        tvHeight = findViewById(R.id.tvHeight)
+        rsHeight = findViewById(R.id.rsHeight)
     }
 
     private fun initListeners() {
@@ -35,6 +43,11 @@ class ImcCalculatorActivity : AppCompatActivity() {
             changeGender()
             setGenderColor()
         }
+rsHeight.addOnChangeListener { _, value, _ ->
+    val df = DecimalFormat("#.##")
+    val result = df.format(value)
+    tvHeight.text = "$result cm"
+}
     }
 
     private fun changeGender() {
