@@ -27,4 +27,5 @@
 <!--TodoApp-->
     <string name="todo_tittle">Bienvenido Compi</string>
     <string name="todo_categories">Categorías:</string>
+    <string name="todo_tasks">Tareas:</string>
 </resources>
