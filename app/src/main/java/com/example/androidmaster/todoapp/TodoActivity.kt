@@ -3,6 +3,10 @@ package com.example.androidmaster.todoapp
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidmaster.R
@@ -41,6 +45,24 @@ class TodoActivity : AppCompatActivity() {
 
     private fun showDialog() {
         val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_task)
+
+        val btnAddTask: Button = dialog.findViewById(R.id.btnAddTask)
+        val etTask: EditText = dialog.findViewById(R.id.etTask)
+        val rgCategories: RadioGroup = dialog.findViewById(R.id.rgCategories)
+
+        btnAddTask.setOnClickListener {
+            val selectedId = rgCategories.checkedRadioButtonId
+            val selectedRadioButton: RadioButton = rgCategories.findViewById(selectedId)
+            val currentCategory: TaskCategory = when (selectedRadioButton.text) {
+                "Negocios" -> Business
+                "Personal" -> Personal
+                else -> Other
+            }
+            tasks.add(Task(etTask.text.toString(), currentCategory))
+        }
+
+        dialog.show()
     }
 
     private fun initComponent() {
